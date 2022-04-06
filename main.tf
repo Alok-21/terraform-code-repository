@@ -41,7 +41,7 @@ module "vpc" {
 
   tags = {
     Terraform = "true"
-    Environment = "dev"
+    Environment = "test"
   }
 }
 
@@ -131,7 +131,7 @@ resource "aws_instance" "bastion" {
   subnet_id              = "${element(module.vpc.public_subnets,0)}"
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = "test"
     Name        = "bastion"
   }
 
@@ -152,7 +152,7 @@ resource "aws_instance" "app" {
 
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = "test"
     Name        = "app"
   }
 
@@ -172,7 +172,7 @@ resource "aws_instance" "jenkins" {
 
   tags = {
     Terraform   = "true"
-    Environment = "dev"
+    Environment = "test"
     Name        = "jenkins"
   }
 
@@ -198,11 +198,11 @@ resource "aws_lb" "test" {
   subnets            = ["${element(module.vpc.public_subnets,0)}","${element(module.vpc.public_subnets,1)}"]
 
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
 
   tags = {
-    Environment = "production"
+    Environment = "test"
   }
                             
 }
